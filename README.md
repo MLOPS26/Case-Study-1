@@ -1,8 +1,8 @@
 ---
-title: "FGDemo"
+title: "MathHelper"
 sdk: "gradio"
 sdk_version: "6.4.0"
 python_version: "3.14"
-app_file: grad_app.py
+app_file: gradio_app.py
 pinned: True
 ---
