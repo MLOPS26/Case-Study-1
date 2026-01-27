@@ -17,3 +17,20 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: git push https://afrenkai:$HF_TOKEN@huggingface.co/spaces/MLOps26/FGDemo main
+      - name: Send email notification
+        if: always()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "MLOps: Hugging Face Sync ${{ job.status }}"
+          to: kagupta@wpi.com, afrenk@wpi.edu
+          from: ${{ secrets.EMAIL_USERNAME }}
+          body: |
+            Status: ${{ job.status }}
+            Repository: ${{ github.repository }}
+            Branch: ${{ github.ref_name }}
+            Commit: ${{ github.sha }}
+            Triggered by: ${{ github.actor }}
