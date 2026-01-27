@@ -26,7 +26,7 @@ jobs:
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "MLOps: Hugging Face Sync ${{ job.status }}"
-          to: kagupta@wpi.com, afrenk@wpi.edu
+          to: cejason@wpi.edu, kagupta@wpi.edu, afrenk@wpi.edu
           from: ${{ secrets.EMAIL_USERNAME }}
           body: |
             Status: ${{ job.status }}
