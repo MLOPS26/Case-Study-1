@@ -12,7 +12,7 @@ def setup_model(model_name: str) -> tuple:
     model = AutoModelForVision2Seq.from_pretrained(
         model_name,
         device_map="auto",
-        torch_dtype=torch.float32,  # Use float32 for CPU compatibility
+        torch_dtype=torch.float32,
         trust_remote_code=True,
     )
 
@@ -30,7 +30,7 @@ def setup_model(model_name: str) -> tuple:
             "up_proj",
             "down_proj",
         ],
-        task_type="CAUSAL_LM",  # or appropriate task type for VLM if supported directly, often mapped to CAUSAL_LM layers
+        task_type="CAUSAL_LM",
     )
 
     model = get_peft_model(model, peft_config)

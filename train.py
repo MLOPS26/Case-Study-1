@@ -9,7 +9,7 @@ def train(tokenizer, model, reward_funcs, train_ds):
         weight_decay=0.1,
         warmup_ratio=0.1,
         lr_scheduler_type="cosine",
-        optim="adamw_torch",  # changed from adamw_8bit for CPU compatibility
+        optim="adamw_torch",
         logging_steps=1,
         per_device_train_batch_size=1,
         gradient_accumulation_steps=2,
