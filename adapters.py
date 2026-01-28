@@ -1,35 +1,27 @@
-from transformers import TextStreamer, AutoModelForVision2Seq, AutoProcessor
-from peft import PeftModel
+from transformers import TextStreamer
+from unsloth import FastVisionModel
 from dotenv import load_dotenv
 import os
 
 
-def save_model(model, tokenizer, local: bool):
-    if local:
-        model_name = "lora_model"
-        model.save_pretrained(model_name)
-        tokenizer.save_pretrained(model_name)
-    else:
-        raise NotImplementedError
-    return model_name
-
-
-def save_gguf(model_name: str, local: bool, tokenizer):
+def save_model(model, tokenizer, local: bool) -> None:
     load_dotenv()
-    base_model_name = "Qwen/Qwen2-VL-7B-Instruct"
-    base_model = AutoModelForVision2Seq.from_pretrained(
-        base_model_name, device_map="auto", trust_remote_code=True
-    )
-
     if local:
-        model = PeftModel.from_pretrained(base_model, model_name)
-        model = model.merge_and_unload()
-
-        output_dir = "math_finetune"
-        model.save_pretrained(output_dir)
-        tokenizer.save_pretrained(output_dir)
-        print(f"Merged model saved to {output_dir}")
+        model.save_pretrained()
+        tokenizer.save_pretrained("ft_llava")
     else:
-        raise NotImplementedError(
-            "Remote push not fully adapted for generic PEFT in this snippet yet"
-        )
+        model.push_to_hub(f"{os.getenv("ORG_NAME")}/ft_llava", token = os.getenv("HF_TOKEN"))        
+    return 
+
+
+def save_gguf(model_name: str, local:bool, tokenizer): 
+    model, processor = FastVisionModel.from_pretrained(
+        model_name= model_name, 
+        load_in_4bit=True,  
+    )
+    FastVisionModel.for_inference(model) 
+    if local:
+        model.save_pretrained_merged("ft_qwen2_vl_2b", tokenizer)
+
+    else:
+        model.push_to_hub_merged(f"{os.getenv("ORG_NAME")}/ft_qwen2_vl_2b", tokenizer, token = f"{os.getenv("HF_TOKEN")}")
