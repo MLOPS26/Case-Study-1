@@ -1,0 +1,17 @@
+[project]
+name = "case-study-1"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "python-dotenv>=1.2.1",
+    "trl>=0.27.1",
+    "peft>=0.7.0",
+    "gradio>=6.5.0",
+    "pytz>=2025.2",
+    "transformers>=4.56.2",
+    "datasets>=3.6.0",
+    "unsloth>=2025.9.9",
+    "qwen-vl-utils>=0.0.14",
+]
