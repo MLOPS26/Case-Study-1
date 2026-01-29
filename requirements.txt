@@ -1,4 +1,6 @@
 torch
+torchvision
+torchaudio 
 gradio
 Pillow
 transformers
