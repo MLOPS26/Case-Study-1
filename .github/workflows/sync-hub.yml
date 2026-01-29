@@ -16,7 +16,7 @@ jobs:
       - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push https://MLOps26:$HF_TOKEN@huggingface.co/spaces/MLOps26/FGDemo main
+        run: git push --force https://MLOps26:$HF_TOKEN@huggingface.co/spaces/MLOps26/FGDemo HEAD:main
       - name: Send email notification
         if: always()
         uses: dawidd6/action-send-mail@v3
