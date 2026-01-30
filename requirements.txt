@@ -6,3 +6,6 @@ Pillow
 transformers
 qwen-vl-utils
 accelerate
+fastapi
+uvicorn
+python-multipart

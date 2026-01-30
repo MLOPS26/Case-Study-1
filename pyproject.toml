@@ -14,4 +14,10 @@ dependencies = [
     "datasets>=3.6.0",
     "unsloth>=2025.9.9",
     "qwen-vl-utils>=0.0.14",
+    "duckdb>=1.4.4",
+]
+
+[tool.uv.workspace]
+members = [
+    "server",
 ]
