@@ -1,5 +1,5 @@
 import duckdb
-from consts import DB_NAME
+from utils.consts import DB_NAME
 
 def init_db():
     conn = duckdb.connect(DB_NAME)
