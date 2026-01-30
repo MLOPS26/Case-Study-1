@@ -1,5 +1,4 @@
 from datasets import Dataset
-import torch
 from consts import REASONING_START, REASONING_END, SOLUTION_START, SOLUTION_END 
 
 
@@ -8,8 +7,8 @@ def is_numeric_answer(example):
   try:
     float(example["answer"])
     return True
-  except:
-    return False
+  except Exception as e:
+    raise AssertionError(f"{e}")
 
 def resize_images(example):
     image = example["decoded_image"]
