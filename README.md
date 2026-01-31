@@ -1,4 +1,4 @@
---
+---
 title: "Shrug Intelligence Demo"
 sdk: "gradio"
 sdk_version: "6.4.0"
