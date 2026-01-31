@@ -84,7 +84,7 @@ with gr.Blocks(theme=gr.themes.Soft(), title="Qwen2-VL Analyst") as app:
     # Header
     gr.Markdown(
         """
-        Qwen2-VL: Upload an image and ask a question
+        ¯\(ツ)/¯ Intelligence: Upload an image and ask a question
         """
     )
     
