@@ -1,4 +1,3 @@
-from transformers import TextStreamer
 from unsloth import FastVisionModel
 from dotenv import load_dotenv
 import os

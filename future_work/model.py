@@ -1,5 +1,4 @@
 from unsloth import FastVisionModel
-import torch
 from consts import BASE_MODEL
 
 
