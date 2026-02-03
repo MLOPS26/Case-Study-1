@@ -11,6 +11,7 @@ pipe = pipeline("image-text-to-text", model = BASE_MODEL)
 
 def query_remote(image: Image.Image, question: str, pipe):
     start_time = time.time()
+    print("starting remote inference... %s" %(start_time))
     if not Image:
         raise ValueError("Missing image")
 

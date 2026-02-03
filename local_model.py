@@ -12,7 +12,8 @@ processor = AutoProcessor.from_pretrained(BASE_MODEL)
 
 def query_local(image: Image.Image, question: str):
     start_time = time.time()
-    if image is None:
+    print("starting local inference at: %s" %( start_time))
+    if not image:
         raise ValueError("Missing image")
 
     messages = [
