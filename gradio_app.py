@@ -1,13 +1,13 @@
 import gradio as gr
 from local_model import query_local
-from remote_model import query_remote, pipe
+from remote_model import query_remote, client
 import time
 
 def query(image, question, model_name):
     if model_name == "Local":
         return query_local(image, question)
     elif model_name == "Remote":
-        return query_remote(image, question, pipe)
+        return query_remote(image, question, client)
     return "No model selected"
 
 

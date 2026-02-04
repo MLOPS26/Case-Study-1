@@ -1,32 +1,37 @@
 from huggingface_hub import InferenceClient
-import huggingface_hub
-from consts import BASE_MODEL
 from PIL import Image
-from transformers import pipeline
 import time
+import base64
+from io import BytesIO
 
+remote_model="zai-org/GLM-4.5V"
 
-pipe = pipeline("image-text-to-text", model = BASE_MODEL)
+client = InferenceClient(model=remote_model)
 
-
-def query_remote(image: Image.Image, question: str, pipe):
+def query_remote(image: Image.Image, question: str, client: InferenceClient):
     start_time = time.time()
     print("starting remote inference... %s" %(start_time))
+
     if not Image:
         raise ValueError("Missing image")
+
+    buffered = BytesIO()
+    image.save(buffered, format="JPEG")
+    img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
+    image_url = f"data:image/jpeg;base64,{img_str}"
 
     messages = [
         {
             "role": "user",
             "content": [
-                {"type": "image", "image": image},
+                {"type": "image_url", "image_url": {"url": image_url}},
                 {"type": "text", "text": question}
             ]
         }
     ]
 
-    outputs = pipe(text=messages, return_full_text=False)
+    response = client.chat.completions.create(messages=messages, max_tokens=256)
 
     print("remote time %s --- " % (time.time() - start_time))
 
-    return outputs[0]["generated_text"]
+    return response.choices[0].message.content
