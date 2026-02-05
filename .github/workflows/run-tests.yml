@@ -1,0 +1,24 @@
+name: run-tests
+
+jobs: 
+  uv-example:
+  name: python
+  runs-on: ubuntu-latest
+
+  steps:
+  - uses: actions/checkout@v6
+  
+
+  - name: Install uv
+    run: astral-sh/setup-uv@v7
+
+  - name: Install Project
+    run: uv sync --locked --all-extras --dev
+
+  - name: Run test
+    run: uv run pytest tests
+
+  - name: Let me know this worked
+    run: echo "yeah it did lol"
+
+
