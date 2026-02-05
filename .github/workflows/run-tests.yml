@@ -7,9 +7,9 @@ on:
 
 
 jobs: 
-  uv-example:
-  name: python
-  runs-on: ubuntu-latest
+  run-tests:
+   name: python
+   runs-on: ubuntu-latest
 
   steps:
   - uses: actions/checkout@v6
