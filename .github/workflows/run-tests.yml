@@ -13,10 +13,9 @@ jobs:
 
    steps:
     - uses: actions/checkout@v6
-    
 
     - name: Install uv
-      run: astral-sh/setup-uv@v7
+      uses: astral-sh/setup-uv@v7
 
     - name: Install Project
       run: uv sync --locked --all-extras --dev
