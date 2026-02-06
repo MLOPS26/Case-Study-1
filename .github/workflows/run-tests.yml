@@ -22,6 +22,8 @@ jobs:
 
     - name: Run test
       run: uv run pytest tests
+      env:
+        HF_TOKEN: ${{ secrets.HF_TOKEN }}
 
     - name: Let me know this worked
       run: echo "yeah it did lol"
